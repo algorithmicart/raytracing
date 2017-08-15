@@ -1,5 +1,7 @@
 #include "colors.inc"
 #include "stars.inc"
+#include "textures.inc"
+
 
 global_settings {
     assumed_gamma 2.2
@@ -8,11 +10,25 @@ global_settings {
 camera {
     location <0, 1, -4>
     look_at  <0, 0,  2>
+
+    focal_point < 0, 1, 0.2>
+    aperture 0.09
+    blur_samples 40
     }
 
 
  light_source { <10, 10, -10> color White}
  light_source { <-10, 10, -10> color Yellow}
+
+ light_source {
+    <-8, 8, -8>
+    color White
+    spotlight
+    radius 0.5
+    falloff 5
+    tightness 10
+    point_at  <0, 0, 0>
+  }
 
 
 sphere{ <0,0,0>, 1
@@ -47,7 +63,10 @@ height_field {
     png "mandel.png"
     water_level 0.1
     smooth
-    pigment { White }
+    texture {
+      Rust
+      scale 0.9
+    }
     translate <-.5, -.5, -0.5>
     rotate <0, 180, 0>
     scale <8, 1, 8>
